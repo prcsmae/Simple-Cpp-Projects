@@ -1,2 +1,3 @@
-# Rock-Paper-Scissors
-Simple C++ program for a rock and paper scissors game.
+# Simple C++ Projects
+
+This repository contains simple C++ projects I will be creating while learning the language.
