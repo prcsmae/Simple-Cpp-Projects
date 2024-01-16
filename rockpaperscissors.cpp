@@ -11,42 +11,58 @@ using namespace std;
 char toLower(char c);
 void Clear() { cout << "\x1B[2J\x1B[H"; }
 int coinToss (string choice1);
+int correctInput(string gameChoice, string input[]);
 
 int main() {
     Clear();
     cout << "This program lets you play rock paper scissors between two players.\n";
     cout << "Choose a side of the coin to determine which player plays first.\n\n";
     
-    string choice1, choice2, gameChoice1, gameChoice2;
-     cout << "Player 1 choice (Heads or Tails): ";
-    cin >> choice1;
+    string choice1, choice2, gameChoice1, gameChoice2, input[3] = {"heads", "tails"};
+
+    do{
+        cout << "\nPlayer 1 choice (Heads or Tails): ";
+        cin >> choice1;
+    } while(correctInput(choice1, input));
+
     int turn = coinToss(choice1), score1 = 0, score2 = 0;
+    input[0] = "rock";
+    input[1] = "paper";
+    input[2] = "scissors";
 
     cout << "\n\n---------------------------------------------";
     cout << "\n\tGame will now start.\n";
     cout << "---------------------------------------------\n";
-
+    
     for (int rounds = 0; rounds <3 ; rounds ++){
         switch (turn){
             case 1:
-                cout << "\nPlayer 1 choice (rock, paper, or scissors): ";
-                cin >> gameChoice1;
-                transform(gameChoice1.begin(), gameChoice1.end(), gameChoice1.begin(), toLower); 
+                do{
+                    cout << "\nPlayer 1 choice (rock, paper, or scissors): ";
+                    cin >> gameChoice1;
+                    transform(gameChoice1.begin(), gameChoice1.end(), gameChoice1.begin(), toLower); 
+                } while(correctInput(gameChoice1, input));
 
-                cout << "\nPlayer 2 choice (rock, paper, or scissors): ";
-                cin >> gameChoice2;
-                transform(gameChoice2.begin(), gameChoice2.end(), gameChoice2.begin(), toLower);
+                do{
+                    cout << "\nPlayer 2 choice (rock, paper, or scissors): ";
+                    cin >> gameChoice2;
+                    transform(gameChoice2.begin(), gameChoice2.end(), gameChoice2.begin(), toLower);
+                } while (correctInput(gameChoice2, input));
 
                 break;
             case 2:
-                cout << "\nPlayer 2 choice (rock, paper, or scissors): ";
-                cin >> gameChoice2;
-                transform(gameChoice2.begin(), gameChoice2.end(), gameChoice2.begin(), toLower);
-
-                cout << "\nPlayer 1 choice (rock, paper, or scissors): ";
-                cin >> gameChoice1;
-                transform(gameChoice1.begin(), gameChoice1.end(), gameChoice1.begin(), toLower); 
-
+                do{
+                    cout << "\nPlayer 2 choice (rock, paper, or scissors): ";
+                    cin >> gameChoice2;
+                    transform(gameChoice2.begin(), gameChoice2.end(), gameChoice2.begin(), toLower);
+                } while (correctInput(gameChoice2, input));
+            
+                do{
+                    cout << "\nPlayer 1 choice (rock, paper, or scissors): ";
+                    cin >> gameChoice1;
+                    transform(gameChoice1.begin(), gameChoice1.end(), gameChoice1.begin(), toLower); 
+                } while(correctInput(gameChoice1, input));
+                
                 break;
         }
 
@@ -57,16 +73,17 @@ int main() {
                     gameChoice1 == "scissors" && gameChoice2 == "paper"){
                         score1++;
                         cout << "\nPlayer 1 wins!\n";
-                        cout << "\nCurrent score: \nPlayer 1: " << score1 << "\nPlayer 2: " << score2;
+                        cout << "\nCurrent score: \nPlayer 1: " << score1 << "\nPlayer 2: " << score2 << endl;
                         turn = 2;
                     }
         else{
             cout << "\nPlayer 2 wins!\n";
             score2++;
-            cout << "\nCurrent score: \nPlayer 1: " << score1 << "\nPlayer 2: " << score2;
+            cout << "\nCurrent score: \nPlayer 1: " << score1 << "\nPlayer 2: " << score2 << endl;
             turn = 1;
         }
     }
+
     if (score1 > score2){
         cout << "\n\nPlayer 1 is the ultimate winner! Try again next time player 2.";
     } else if (score2 > score1){
@@ -131,4 +148,14 @@ int coinToss (string choice1){
             break;
     }
     return turn;
+}
+
+int correctInput(string gameChoice, string input[3]){
+    if (!(gameChoice == input[0] || gameChoice == input[1] || gameChoice == input [2])){
+        cout << "\nInput incorrect. Try again.\n";
+        return 1;
+    }
+    else {
+        return 0;
+    }
 }
