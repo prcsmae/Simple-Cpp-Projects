@@ -11,7 +11,7 @@ using namespace std;
 char toLower(char c);
 void Clear() { cout << "\x1B[2J\x1B[H"; }
 int coinToss (string choice1);
-int correctInput(string gameChoice, string input[]);
+int correctInput(string gameChoice, string input[3]);
 
 int main() {
     Clear();
@@ -21,7 +21,7 @@ int main() {
     string choice1, choice2, gameChoice1, gameChoice2, input[3] = {"heads", "tails"};
 
     do{
-        cout << "\nPlayer 1 choice (Heads or Tails): ";
+        cout << "Player 1 choice (Heads or Tails): ";
         cin >> choice1;
     } while(correctInput(choice1, input));
 
@@ -33,7 +33,7 @@ int main() {
     cout << "\n\n---------------------------------------------";
     cout << "\n\tGame will now start.\n";
     cout << "---------------------------------------------\n";
-    
+
     for (int rounds = 0; rounds <3 ; rounds ++){
         switch (turn){
             case 1:
