@@ -94,6 +94,8 @@ int main() {
     } else if (score2 > score1){
         cout << "\n\nMachine is the ultimate winner! Try again next time player 1.";
     }
+
+    return 0;
 }
 
 // function to convert input string to lowercase to be able to compare them
@@ -187,4 +189,5 @@ string machineChoice() {
             return "scissors";
             break;
     }
+    return 0;
 }
