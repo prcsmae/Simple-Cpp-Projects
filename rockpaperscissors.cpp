@@ -18,14 +18,19 @@ int main() {
     cout << "This program lets you play rock paper scissors between two players.\n";
     cout << "Choose a side of the coin to determine which player plays first.\n\n";
     
+    // Declaration of strings
     string choice1, choice2, gameChoice1, gameChoice2, input[3] = {"heads", "tails"};
 
+    // do-while loop that asks for player 1's side of the coin and handles errors
     do{
         cout << "Player 1 choice (Heads or Tails): ";
         cin >> choice1;
     } while(correctInput(choice1, input));
 
+    // calls the coinToss function and assigns the return value to the turn variable, also declares the score variables
     int turn = coinToss(choice1), score1 = 0, score2 = 0;
+
+    // re-assigning new values to the input array to be used in handling errors for the correctInput function
     input[0] = "rock";
     input[1] = "paper";
     input[2] = "scissors";
@@ -34,7 +39,9 @@ int main() {
     cout << "\n\tGame will now start.\n";
     cout << "---------------------------------------------\n";
 
+    // Game formal
     for (int rounds = 0; rounds <3 ; rounds ++){
+        // switch loop that asks for their choice (rock, paper, or scissors)
         switch (turn){
             case 1:
                 do{
@@ -66,6 +73,7 @@ int main() {
                 break;
         }
 
+        // code snippet that determines who won in the round
         if (gameChoice1 == gameChoice2){
             cout << "It's a tie!\n";
             rounds--;
@@ -84,6 +92,7 @@ int main() {
         }
     }
 
+    // code snippet that displays the ultimate winner
     if (score1 > score2){
         cout << "\n\nPlayer 1 is the ultimate winner! Try again next time player 2.";
     } else if (score2 > score1){
@@ -91,6 +100,7 @@ int main() {
     }
 }
 
+// function to convert input string to lowercase to be able to compare them
 char toLower(char c) {
     // static_cast<unsigned char> is used to convert c to an unsigned char data type.
     /* unsigned char ensures that the value of c is treated as an unsigned character
@@ -98,6 +108,7 @@ char toLower(char c) {
     return tolower(static_cast<unsigned char>(c));
 }
 
+// function to determine which player goes first
 int coinToss (string choice1){
     string choice2;
     // Transforms the input string in the case the user inputs uppercase
@@ -150,6 +161,7 @@ int coinToss (string choice1){
     return turn;
 }
 
+// function that determines whether the input is correct based on the values in the input array
 int correctInput(string gameChoice, string input[3]){
     if (!(gameChoice == input[0] || gameChoice == input[1] || gameChoice == input [2])){
         cout << "\nInput incorrect. Try again.\n";
